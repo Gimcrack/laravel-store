@@ -1,0 +1,22 @@
+{
+    "name": "ingenious/laravel-store",
+    "description": "A store integration for laravel",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeremy Bloomstrom",
+            "email": "jeremy@jeremybloomstrom.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "~5.1",
+        "kitetail/zttp": "^0.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ingenious\\Store\\": "src/"
+        }
+    }
+}
