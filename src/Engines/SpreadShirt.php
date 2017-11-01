@@ -40,7 +40,7 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
         if ( ! isset($response->products) )
             abort(404);
 
-        $response = $response->products;
+        $response = (object) $response->products;
 
         $response->data = collect($response->product);
         unset($response->product);
@@ -61,7 +61,7 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
         if ( ! isset($response->product) )
             abort(404);
 
-        return $response->product;
+        return (object) $response->product;
     }
 
 
