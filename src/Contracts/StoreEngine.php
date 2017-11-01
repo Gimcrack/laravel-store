@@ -10,4 +10,6 @@ interface StoreEngine {
 
     public function product(int $id) : StdClass;
 
+    public function price(int $id) : StdClass;
+
 }

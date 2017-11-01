@@ -45,4 +45,19 @@ class FakeStore extends StoreEngineStub implements StoreEngineContract {
         return (object) $atts;
     }
 
+    /**
+     * Get the price for a product
+     * @method price
+     *
+     * @return   StdClass
+     */
+    public function price(int $id) : StdClass
+    {
+        return (object) [
+            'vatExcluded' => 12.00
+        ];
+
+
+    }
+
 }

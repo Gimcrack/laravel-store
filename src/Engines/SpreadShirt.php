@@ -24,7 +24,7 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
         $this->secret = $secret;
         $this->shopId = $shopId;
 
-        $this->endpoint = "http://api.spreadshirt.net/api/v1/shops/{$this->shopId}";
+        $this->endpoint = "http://api.spreadshirt.com/api/v1/shops/{$this->shopId}";
     }
 
     /**
@@ -35,7 +35,7 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
      */
     public function products() : StdClass
     {
-        $response = (object) $this->getJson("products");
+        $response = (object) $this->getJson("products?limit=100");
 
         if ( ! isset($response->products) )
             abort(404);
@@ -66,6 +66,22 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
             abort(404);
 
         return (object) $response->product;
+    }
+
+    /**
+     * Get a price record for a product
+     * @method price
+     *
+     * @return   StdClass
+     */
+    public function price(int $id) : StdClass
+    {
+        $response = (object) $this->getJson("products/{$id}/price");
+
+        if ( ! isset($response->price) )
+            abort(404);
+
+        return (object) $response->price;
     }
 
 
