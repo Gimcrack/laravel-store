@@ -42,7 +42,11 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
 
         $response = (object) $response->products;
 
-        $response->data = collect($response->product);
+        $response->data = collect($response->product)
+            ->transform( function($product) {
+                return (object) $product;
+            });
+
         unset($response->product);
 
         return $response;
