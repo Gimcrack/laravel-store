@@ -1,9 +1,9 @@
 <?php
 
+namespace Ingenious\Store;
+
 use Zttp\Zttp;
 use Illuminate\Support\Facades\Cache;
-
-namespace Ingenious\Store;
 
 abstract class StoreEngineStub {
 
@@ -17,7 +17,7 @@ abstract class StoreEngineStub {
      *
      * @return   string
      */
-    private function endpoint()
+    protected function endpoint()
     {
         return $this->endpoint;
     }
@@ -29,7 +29,7 @@ abstract class StoreEngineStub {
      *
      * @return   string
      */
-    private function url($url)
+    protected function url($url)
     {
         return vsprintf("%s/%s", [
             $this->endpoint,
@@ -43,7 +43,7 @@ abstract class StoreEngineStub {
      *
      * @param      <type>  $url    The url
      */
-    private function get( $url )
+    protected function get( $url )
     {
         $response = Zttp::get( $url );
         return $response;
@@ -56,7 +56,7 @@ abstract class StoreEngineStub {
      *
      * @return   response
      */
-    private function getJson($url)
+    protected function getJson($url)
     {
         $expanded = $this->url($url);
 
@@ -77,7 +77,7 @@ abstract class StoreEngineStub {
      *
      * @return   json
      */
-    private function xml_to_json($xml, $options = array())
+    protected function xml_to_json($xml, $options = array())
     {
         if ( is_string($xml) ) {
             $xml = new \SimpleXMLElement($xml);

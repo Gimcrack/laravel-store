@@ -12,7 +12,7 @@ class FakeStore extends StoreEngineStub implements StoreEngineContract {
      * Get a list of products
      * @method products
      *
-     * @return   Collection
+     * @return   StdClass
      */
     public function products() : StdClass
     {
@@ -25,6 +25,24 @@ class FakeStore extends StoreEngineStub implements StoreEngineContract {
             'sortOrder' => 'default',
             'data' => factory("Ingenious\Store\Models\FakeProduct",5)->make()
         ];
+    }
+
+    /**
+     * Get a single product
+     * @method product
+     *
+     * @return   StdClass
+     */
+    public function product(int $id) : StdClass
+    {
+        $atts = (array) [
+            'xlink:href' => "http://fake.spreadshirt.net/api/v1/shops/1092276/products/{$id}",
+            'weight' => 0,
+            'lifeCycleState' => 'ACTIVATED',
+            'id' => $id,
+        ] + factory("Ingenious\Store\Models\FakeProduct")->make()->toArray();
+
+        return (object) $atts;
     }
 
 }

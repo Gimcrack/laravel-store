@@ -8,4 +8,6 @@ interface StoreEngine {
 
     public function products() : StdClass;
 
+    public function product(int $id) : StdClass;
+
 }

@@ -2,7 +2,7 @@
 
 namespace Ingenious\Store\Engines;
 
-use Cache;
+
 use StdClass;
 use Zttp\Zttp;
 use Carbon\Carbon;
@@ -31,16 +31,37 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
      * Get a list of products
      * @method products
      *
-     * @return   Collection
+     * @return   StdClass
      */
     public function products() : StdClass
     {
-        $response = (object) $this->getJson("products")->products;
+        $response = (object) $this->getJson("products");
+
+        if ( ! isset($response->products) )
+            abort(404);
+
+        $response = $response->products;
 
         $response->data = collect($response->product);
         unset($response->product);
 
         return $response;
+    }
+
+    /**
+     * Get a single product resource
+     * @method product
+     *
+     * @return   StdClass
+     */
+    public function product(int $id) : StdClass
+    {
+        $response = (object) $this->getJson("products/{$id}");
+
+        if ( ! isset($response->product) )
+            abort(404);
+
+        return $response->product;
     }
 
 
