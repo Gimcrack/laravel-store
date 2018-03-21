@@ -12,10 +12,6 @@ use Ingenious\Store\Contracts\StoreEngine as StoreEngineContract;
 
 class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
 
-    protected $key;
-
-    protected $secret;
-
     protected $shopId;
 
     public function __construct($key, $secret, $shopId)
@@ -24,7 +20,7 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
         $this->secret = $secret;
         $this->shopId = $shopId;
 
-        $this->endpoint = "http://api.spreadshirt.com/api/v1/shops/{$this->shopId}";
+        $this->endpoint = "https://api.spreadshirt.com/api/v1/shops/{$this->shopId}";
     }
 
     /**
@@ -38,7 +34,10 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
         $response = (object) $this->getJson("products?limit=100");
 
         if ( ! isset($response->products) )
+        {
+            dd($response);
             abort(404);
+        }
 
         $response = (object) $response->products;
 
@@ -56,7 +55,8 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
      * Get a single product resource
      * @method product
      *
-     * @return   StdClass
+     * @param int $id
+     * @return StdClass
      */
     public function product(int $id) : StdClass
     {
@@ -72,7 +72,8 @@ class SpreadShirt extends StoreEngineStub implements StoreEngineContract {
      * Get a price record for a product
      * @method price
      *
-     * @return   StdClass
+     * @param int $id
+     * @return StdClass
      */
     public function price(int $id) : StdClass
     {
